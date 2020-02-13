@@ -1,0 +1,15 @@
+{
+    "cics.async": {
+        "Description": "Async Library for CovScript",
+        "Author": "Covariant Institute",
+        "State": "Preview",
+        "Version": "1.0",
+        "RemoteUrl": "https://github.com/covscript/csman-async",
+        "Dependencies": {
+            "cs.runtime": "Stable"
+        },
+        "Contents": {
+            "CSE": "async.cse"
+        }
+    }
+}
