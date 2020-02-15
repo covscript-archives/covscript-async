@@ -19,6 +19,7 @@
 #else
 
 #include <sys/wait.h>
+#include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
 
@@ -258,8 +259,14 @@ namespace covscript_process {
 					CloseHandle(p_stderr[pipe_write]);
 			}
 
+			void kill()
+			{
+				TerminateProcess(pi.hProcess, 0);
+			}
+
 			~system_process()
 			{
+				kill();
 				CloseHandle(pi.hProcess);
 				CloseHandle(pi.hThread);
 				if (m_psi.redirect_stdin) {
@@ -375,8 +382,14 @@ namespace covscript_process {
 				}
 			}
 
+			void kill()
+			{
+				kill(pid, SIGKILL);
+			}
+
 			~system_process()
 			{
+				kill();
 				if (m_psi.redirect_stdin)
 					close(p_stdin[pipe_write]);
 				if (m_psi.redirect_stdout)
@@ -474,6 +487,10 @@ namespace covscript_process {
 			return cs::istream(&process->get_stderr(), [](std::istream *) {});
 		}
 #endif
+		void kill_process() const
+		{
+			process->kill();
+		}
 
 		bool has_exited() const
 		{

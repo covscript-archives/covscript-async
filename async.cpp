@@ -74,6 +74,7 @@ CNI_ROOT_NAMESPACE {
 			CNI_V(in, &process_t::get_cs_stdin)
 			CNI_V(out, &process_t::get_cs_stdout)
 			CNI_V(err, &process_t::get_cs_stderr)
+            CNI_V(kill, &process_t::kill_process)
 			CNI_V(wait, &process_t::wait_for_exit)
 			CNI_V(exit_code, &process_t::get_exit_code)
 			CNI_V(has_exited, &process_t::has_exited)
